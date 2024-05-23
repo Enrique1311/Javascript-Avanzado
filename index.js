@@ -144,17 +144,17 @@ const datos = [
 // console.log(getDatos2());
 
 // Para ejecutar un setTimeout para mostrar los datos externos de sí mismo
-const getDatos3 = () => {
-	return new Promise((resolve, reject) => {
-		if (datos.length === 0) {
-			reject(new Error("No hay datos..."));
-		} else {
-			setTimeout(() => {
-				resolve(datos);
-			}, 2000);
-		}
-	});
-};
+// const getDatos3 = () => {
+// 	return new Promise((resolve, reject) => {
+// 		if (datos.length === 0) {
+// 			reject(new Error("No hay datos..."));
+// 		} else {
+// 			setTimeout(() => {
+// 				resolve(datos);
+// 			}, 2000);
+// 		}
+// 	});
+// };
 
 // console.log(
 // 	getDatos3()
@@ -219,3 +219,85 @@ const g = generador();
 $generar.addEventListener("click", () => {
 	g.next();
 });
+
+// Manejo de arrays (trucos) ****************************************************************
+
+// Generar un array con el mismo caracter en cada elemento
+const arrayDeCeros = new Array(10).fill(0);
+console.log(arrayDeCeros);
+
+// Aplanar un array al nivel deseado
+const array = [
+	"Martina",
+	"Santiago",
+	["Carolina", "Enrique", ["Caro", "Javier"]],
+	"Sofía",
+	["Iván", "Martu"],
+];
+const array2 = array.flat(2); // Aplana al nivel 2
+console.log(array2);
+
+const array3 = array.flat(Infinity); // Aplana totalmente el array
+console.log(array3);
+
+// Compara los elementos de un array con un elemento dado
+const nombres = [
+	"Martina",
+	"Santiago",
+	"Carolina",
+	"Enrique",
+	"Sofía",
+	"Javier",
+];
+const nombres2Length = nombres.every((name) => name.length > 2); // Devuelve un boolean
+console.log(nombres2Length);
+
+const nombres3Length = nombres.some((name) => name.length > 3); // Devuelve un boolean
+console.log(nombres3Length);
+
+// Genera un nuevo array con el contenido de otros dos array
+const names2 = [...nombres, ...nombres]; //
+console.log(names2);
+
+// Genera un nuevo array con el contenido de otro, y que uno de sus elementos sea otro array
+
+// Genera un nuevo array con el abecedario
+const alfabeto = Array.from({ length: 26 }, (val, i) =>
+	String.fromCharCode(65 + i)
+);
+console.log(alfabeto);
+
+// Genera una copia de un array con un elemento agregado
+const newArray = [...alfabeto, 8];
+console.log(newArray);
+
+// Comparar dos arrays
+const array9 = [1, 2, 3, 4, 5, 6, "Enrique"];
+const array10 = [1, 2, 3, 4, 5, 6, "Enrique"];
+
+const arr9 = JSON.stringify(array9); // Transformar los array a string
+const arr10 = JSON.stringify(array10);
+
+if (arr9 === arr10) {
+	console.log("Son iguales");
+} else {
+	console.log("No son iguales");
+}
+
+// Agrupa un array por un elemento dado
+const paises = [
+	{ pais: "Argentina", idioma: "Español", habitantes: 45000000 },
+	{ pais: "USA", idioma: "Inglés", habitantes: 330000000 },
+	{ pais: "España", idioma: "Español", habitantes: 48000000 },
+	{ pais: "Brasil", idioma: "Portugués", habitantes: 220000000 },
+	{ pais: "Portugal", idioma: "Portugués", habitantes: 10000000 },
+	{ pais: "Irlanda", idioma: "Inglés", habitantes: 5000000 },
+];
+const agruparPorIdioma = Object.groupBy(paises, (el) => el.idioma);
+console.log(agruparPorIdioma);
+
+// Agrupar por cantidad de habitantes (genera arrays por separado)
+const agruparPorHabitantes = Object.groupBy(paises, (el) =>
+	el.habitantes >= 100000000 ? "masDe10Millones" : "menosDe10Millones"
+);
+console.log(agruparPorHabitantes);
